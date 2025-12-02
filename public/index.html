@@ -3,34 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Secret Santa Draw</title>
+    <title>Secret Santa Hat</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>🎅 Secret Santa 🎅</h1>
+        <h1>🎩 Secret Santa 🎩</h1>
+        
         <div id="intake-view" class="input-group">
             <h3>Who are you?</h3>
             <input type="text" id="user-name" placeholder="Your Name" required>
             <input type="email" id="user-email" placeholder="Your Email" required>
             <input type="text" id="team-code" placeholder="Team Code (Optional)">
-            <button id="enter-btn">Enter Game</button>
+            <button id="enter-btn">Enter Room</button>
         </div>
+
         <div id="game-view" class="hidden">
-            <h2>Spin to pick your person!</h2>
-            <div class="wheel-container">
-                <div class="arrow"></div>
-                <div class="wheel" id="wheel"></div>
+            <h2>Tap the Hat to Draw a Name!</h2>
+            <div class="hat-stage">
+                <div class="hat" id="magic-hat">🎩</div>
+                <div id="name-card" class="magic-name-card">
+                    <span id="drawn-name">???</span>
+                </div>
             </div>
-            <button id="spin-btn">SPIN THE WHEEL!</button>
+            <button id="draw-btn">Reach into the Hat</button>
         </div>
+
         <div id="result-view" class="hidden">
-            <div class="result-box">
-                <p>You are the Secret Santa for:</p>
-                <span id="result-name" class="result-name">...</span>
-                <p style="margin-top:20px; font-size: 0.9rem;">(Shhh! Don't tell anyone!)</p>
-                <button onclick="location.reload()" style="margin-top:15px; font-size:1rem;">Done</button>
-            </div>
+            <h3 style="margin-top: 50px;">You drew:</h3>
+            <h1 id="final-result-name" style="font-size: 4rem; color: var(--gold);">...</h1>
+            <p>(Take a screenshot or write it down!)</p>
+            <button onclick="location.reload()" style="margin-top:20px;">Done / Next Person</button>
         </div>
     </div>
     <script src="script.js"></script>

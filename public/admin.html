@@ -10,6 +10,9 @@
         .name-item { display: flex; justify-content: space-between; padding: 5px; border-bottom: 1px solid #7f8c8d; }
         .del-btn { background: #c0392b; padding: 2px 10px; font-size: 0.8rem; margin-left: 10px; border: none;}
         .add-row { display: flex; gap: 10px; margin-top: 20px; }
+        /* New History Styles */
+        .history-item { color: #ecf0f1; font-size: 0.9rem; padding: 8px 0; border-bottom: 1px dashed #555; }
+        .history-arrow { color: var(--gold); font-weight: bold; margin: 0 10px; }
     </style>
 </head>
 <body>
@@ -17,7 +20,7 @@
         <h1>Admin Control</h1>
         
         <div class="input-group">
-            <input type="password" id="admin-pass" placeholder="Admin Password (Required for all actions)">
+            <input type="password" id="admin-pass" placeholder="Admin Password (Required)">
         </div>
 
         <div style="width: 100%; max-width: 500px;">
@@ -27,12 +30,17 @@
                 <button id="add-btn" style="padding: 10px 20px; font-size: 1rem;">Add</button>
             </div>
             
-            <div id="name-list-container" class="name-list">
-                </div>
+            <div id="name-list-container" class="name-list"></div>
         </div>
 
         <div style="margin-top: 40px; border-top: 1px solid #7f8c8d; padding-top: 20px; width: 100%; max-width: 500px;">
-             <h3 style="color: #e74c3c;">Danger Zone</h3>
+             <h3 style="color: #3498db;">Secret History (Logs)</h3>
+             <button id="view-history-btn" style="width: 100%; background: #2980b9;">Reveal Who Picked Whom</button>
+             <div id="history-list" class="name-list" style="display:none; margin-top:10px;">
+                 </div>
+        </div>
+
+        <div style="margin-top: 30px; width: 100%; max-width: 500px;">
              <button id="reset-btn" class="danger-btn" style="width: 100%;">RESET GAME (Refill Pool)</button>
              <p id="admin-msg" style="color:white; margin-top:10px;"></p>
         </div>
