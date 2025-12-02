@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secret Santa Draw</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎅 Secret Santa 🎅</h1>
+        <div id="intake-view" class="input-group">
+            <h3>Who are you?</h3>
+            <input type="text" id="user-name" placeholder="Your Name" required>
+            <input type="email" id="user-email" placeholder="Your Email" required>
+            <input type="text" id="team-code" placeholder="Team Code (Optional)">
+            <button id="enter-btn">Enter Game</button>
+        </div>
+        <div id="game-view" class="hidden">
+            <h2>Spin to pick your person!</h2>
+            <div class="wheel-container">
+                <div class="arrow"></div>
+                <div class="wheel" id="wheel"></div>
+            </div>
+            <button id="spin-btn">SPIN THE WHEEL!</button>
+        </div>
+        <div id="result-view" class="hidden">
+            <div class="result-box">
+                <p>You are the Secret Santa for:</p>
+                <span id="result-name" class="result-name">...</span>
+                <p style="margin-top:20px; font-size: 0.9rem;">(Shhh! Don't tell anyone!)</p>
+                <button onclick="location.reload()" style="margin-top:15px; font-size:1rem;">Done</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
