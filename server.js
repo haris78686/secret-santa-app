@@ -14,12 +14,9 @@ const ADMIN_PASSWORD = "HoHoHo123";
 
 let masterList = ["Alice", "Bob", "Charlie", "Diana", "Evan"];
 let availableNames = [...masterList];
-// assignments stores: { picker: email, pickerName: "Alice", picked: "Bob" }
 let assignments = []; 
 
 const RIGGED_MAP = { "RUDOLPH": "Charlie" };
-
-// --- ROUTES ---
 
 app.get('/api/master-list', (req, res) => res.json(masterList));
 
@@ -61,29 +58,21 @@ app.post('/api/remove-name', (req, res) => {
     res.json({success: true, list: masterList});
 });
 
-// --- SPIN LOGIC ---
 app.post('/api/spin', (req, res) => {
     const { userEmail, userName, teamCode } = req.body; 
 
-    // 1. Security Check
     const match = assignments.find(a => a.picker.toLowerCase() === userEmail.toLowerCase());
-    if (match) {
-        return res.status(400).json({ error: "You already played! You got: " + match.picked });
-    }
+    if (match) return res.status(400).json({ error: "You already played! You got: " + match.picked });
 
-    if (availableNames.length === 0) {
-        return res.status(400).json({ error: "The Hat is Empty!" });
-    }
+    if (availableNames.length === 0) return res.status(400).json({ error: "The Hat is Empty!" });
 
     let selectedName = null;
 
-    // 2. Rigging Logic
     if (teamCode && RIGGED_MAP[teamCode.toUpperCase()]) {
         const target = RIGGED_MAP[teamCode.toUpperCase()];
         if (availableNames.includes(target)) selectedName = target;
     }
 
-    // 3. Smart Random Logic (Self-Exclusion)
     if (!selectedName) {
         let candidates = availableNames.filter(n => n.toLowerCase() !== userName.toLowerCase());
 
@@ -94,17 +83,15 @@ app.post('/api/spin', (req, res) => {
                  });
             }
         }
-
         const randomIndex = Math.floor(Math.random() * candidates.length);
         selectedName = candidates[randomIndex];
     }
 
-    // 4. Commit (NOW SAVING PICKER NAME)
     availableNames = availableNames.filter(name => name !== selectedName);
     
     assignments.push({ 
         picker: userEmail, 
-        pickerName: userName, // <--- SAVED HERE
+        pickerName: userName, 
         picked: selectedName, 
         timestamp: new Date() 
     });

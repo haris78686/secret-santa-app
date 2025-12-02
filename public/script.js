@@ -13,13 +13,11 @@ let userData = { name: '', email: '', code: '' };
 
 window.addEventListener('load', async () => {
     const savedEmail = localStorage.getItem('santa_email');
-    if(savedEmail) {
-        checkUserStatus(savedEmail);
-    }
+    if(savedEmail) checkUserStatus(savedEmail);
 });
 
 enterBtn.addEventListener('click', () => {
-    const name = document.getElementById('user-name').value.trim(); // Trim whitespace
+    const name = document.getElementById('user-name').value.trim(); 
     const email = document.getElementById('user-email').value.trim();
     const code = document.getElementById('team-code').value;
 
@@ -49,10 +47,7 @@ async function checkUserStatus(email) {
             resultView.classList.add('hidden');
             gameView.classList.remove('hidden');
         }
-    } catch(e) {
-        console.error(e);
-        alert("Server connection error");
-    }
+    } catch(e) { console.error(e); alert("Server connection error"); }
 }
 
 drawBtn.addEventListener('click', async () => {
@@ -61,7 +56,6 @@ drawBtn.addEventListener('click', async () => {
     magicHat.classList.add('shake');
 
     try {
-        // NOW SENDING USERNAME
         const response = await fetch('/api/spin', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -87,9 +81,7 @@ drawBtn.addEventListener('click', async () => {
             nameCard.classList.add('popped-out');
             createSparkles();
 
-            setTimeout(() => {
-                showFinalResult(data.result);
-            }, 3000);
+            setTimeout(() => { showFinalResult(data.result); }, 3000);
         }, 2000);
 
     } catch (e) {
